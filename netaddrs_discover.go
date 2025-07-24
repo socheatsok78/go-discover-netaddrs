@@ -14,7 +14,7 @@ func (p *Provider) Help() string {
 	return `go-netaddrs:
 
     provider:         "netaddrs"
-    args:             "DNS name" or "executable with optional args".
+    exec:             "DNS name" or "executable with optional args".
 `
 }
 
@@ -23,11 +23,11 @@ func (p *Provider) Addrs(args map[string]string, l *log.Logger) ([]string, error
 		return nil, fmt.Errorf("discover-netaddrs: invalid provider " + args["provider"])
 	}
 
-	if args["args"] == "" {
-		return nil, fmt.Errorf("discover-netaddrs: no args provided")
+	if args["exec"] == "" {
+		return nil, fmt.Errorf("discover-netaddrs: no exec provided")
 	}
 
-	addresses, err := netaddrs.IPAddrs(context.Background(), args["args"], logger{l: l})
+	addresses, err := netaddrs.IPAddrs(context.Background(), args["exec"], logger{l: l})
 	if err != nil {
 		return nil, fmt.Errorf("discover-netaddrs: %s", err)
 	}
