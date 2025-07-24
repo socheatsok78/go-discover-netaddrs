@@ -11,7 +11,13 @@ import (
 type Provider struct{}
 
 func (p *Provider) Help() string {
-	return `go-netaddrs:
+	return `netaddrs:
+    Inspired by go-discover, go-netaddrs is a Go (golang) library and command line tool to discover ip addresses of
+    nodes in a customizable fashion suitable for any environment. It returns IP addresses (IPv4 or IPv6) given a
+      - DNS name, OR
+      - custom executable with optional args which:
+        - on success - exits with 0 and prints whitespace delimited IP (v4/v6) addresses to stdout.
+        - on failure - exits with a non-zero code and optionally prints an error message of up to 1024 bytes to stderr.
 
     provider:         "netaddrs"
     exec:             "DNS name" or "executable with optional args".
