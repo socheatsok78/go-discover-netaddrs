@@ -20,7 +20,7 @@ func (p *Provider) Help() string {
         - on failure - exits with a non-zero code and optionally prints an error message of up to 1024 bytes to stderr.
 
     provider:         "netaddrs"
-    args:             "DNS name" or "executable with optional args".
+    addrs:            "DNS name" or "executable with optional args".
 `
 }
 
@@ -29,11 +29,11 @@ func (p *Provider) Addrs(args map[string]string, l *log.Logger) ([]string, error
 		return nil, fmt.Errorf("discover-netaddrs: invalid provider " + args["provider"])
 	}
 
-	if args["args"] == "" {
-		return nil, fmt.Errorf("discover-netaddrs: no args provided")
+	if args["addrs"] == "" {
+		return nil, fmt.Errorf("discover-netaddrs: no addrs provided")
 	}
 
-	addresses, err := netaddrs.IPAddrs(context.Background(), args["args"], logger{l: l})
+	addresses, err := netaddrs.IPAddrs(context.Background(), args["addrs"], logger{l: l})
 	if err != nil {
 		return nil, fmt.Errorf("discover-netaddrs: %s", err)
 	}
